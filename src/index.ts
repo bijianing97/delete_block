@@ -27,6 +27,7 @@ async function main() {
     );
 
     await dbManager.batch(dbOps);
+    console.log("finished");
   }
 }
 
