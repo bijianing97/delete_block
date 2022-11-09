@@ -1,6 +1,6 @@
 import {
   Database,
-  createLevelDB,
+  createEncodingLevelDB,
   DBOp,
   DBSetTD,
   DBTarget,
@@ -11,7 +11,7 @@ import { datadirs } from "./config";
 async function main() {
   const common = new Common({ chain: "rei-testnet" });
   for (const datadir of datadirs) {
-    const db = createLevelDB(datadir)[0];
+    const db = createEncodingLevelDB(datadir)[0];
     const dbManager = new Database(db, common);
     const dbOps: DBOp[] = [];
     const toDeleteBlock = await dbManager.getBlock(7387545);
