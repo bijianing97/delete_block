@@ -17,18 +17,16 @@ async function main() {
     const toDeleteBlock = await dbManager.getBlock(7387545);
     const lastBlock = await dbManager.getBlock(7387544);
     const heads = await dbManager.getHeads();
-    console.log("heads value is : ", heads);
-    //   dbOps.push(
-    //     DBOp.del(DBTarget.HashToNumber, { blockHash: toDeleteBlock.hash() }),
-    //     DBOp.del(DBTarget.NumberToHash, {
-    //       blockNumber: toDeleteBlock.header.number,
-    //     }),
-    //     DBOp.del(DBTarget.Heads, { blockHash: toDeleteBlock.hash() }),
-    //     DBOp.set(DBTarget.HeadHeader, lastBlock.hash()),
-    //     DBOp.set(DBTarget.HeadBlock, lastBlock.hash())
-    //   );
+    dbOps.push(
+      DBOp.del(DBTarget.HashToNumber, { blockHash: toDeleteBlock.hash() }),
+      DBOp.del(DBTarget.NumberToHash, {
+        blockNumber: toDeleteBlock.header.number,
+      }),
+      DBOp.set(DBTarget.HeadHeader, lastBlock.hash()),
+      DBOp.set(DBTarget.HeadBlock, lastBlock.hash())
+    );
 
-    //   await dbManager.batch(dbOps);
+    await dbManager.batch(dbOps);
   }
 }
 
