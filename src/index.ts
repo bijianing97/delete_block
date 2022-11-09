@@ -9,7 +9,7 @@ import { Common } from "@rei-network/common";
 import { datadirs } from "./config";
 
 async function main() {
-  const common = new Common({ chain: "rei-devnet" });
+  const common = new Common({ chain: "rei-testnet" });
   for (const datadir of datadirs) {
     const db = createLevelDB(datadir)[0];
     const dbManager = new Database(db, common);
