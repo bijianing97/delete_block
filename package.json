@@ -1,0 +1,17 @@
+{
+  "name": "delete_block",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rei-network/common": "^1.1.0",
+    "@rei-network/database": "^1.1.0"
+  }
+}
