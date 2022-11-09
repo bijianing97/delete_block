@@ -15,13 +15,25 @@ async function main() {
     const db = createEncodingLevelDB(datadir)[0];
     const dbManager = new Database(db, common);
     const dbOps: DBOp[] = [];
-    const toDeleteBlock = await dbManager.getBlock(7387545);
+    let toDeleteBlockNumber = 7387545;
     const lastBlockHash = await dbManager.numberToHash(new BN(7387544));
+    while (true) {
+      try {
+        const block = await dbManager.getBlock(toDeleteBlockNumber++);
+        dbOps.push(
+          DBOp.del(DBTarget.HashToNumber, { blockHash: block.hash() }),
+          DBOp.del(DBTarget.NumberToHash, {
+            blockNumber: block.header.number,
+          })
+        );
+      } catch (err) {
+        if (err.type === "NotFoundError") {
+          break;
+        }
+        throw err;
+      }
+    }
     dbOps.push(
-      DBOp.del(DBTarget.HashToNumber, { blockHash: toDeleteBlock.hash() }),
-      DBOp.del(DBTarget.NumberToHash, {
-        blockNumber: toDeleteBlock.header.number,
-      }),
       DBOp.set(DBTarget.HeadHeader, lastBlockHash),
       DBOp.set(DBTarget.HeadBlock, lastBlockHash)
     );
