@@ -2,7 +2,6 @@ import {
   Database,
   createEncodingLevelDB,
   DBOp,
-  DBSetTD,
   DBTarget,
 } from "@rei-network/database";
 import { Common } from "@rei-network/common";
@@ -15,8 +14,8 @@ async function main() {
     const db = createEncodingLevelDB(datadir)[0];
     const dbManager = new Database(db, common);
     const dbOps: DBOp[] = [];
-    let toDeleteBlockNumber = 7387545;
-    const lastBlockHash = await dbManager.numberToHash(new BN(7387544));
+    let toDeleteBlockNumber = 7216471;
+    const lastBlockHash = await dbManager.numberToHash(new BN(7216470));
     while (true) {
       try {
         const block = await dbManager.getBlock(toDeleteBlockNumber++);
