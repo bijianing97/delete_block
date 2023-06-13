@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "ts-node src/index.ts"
+    "delete": "node dist/index.js",
+    "test": "node dist/test.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rei-network/common": "^1.1.0",
-    "@rei-network/database": "^1.1.0",
+    "@rei-network/common": "^2.0.1",
+    "@rei-network/database": "^2.0.1",
     "ethereumjs-util": "^7.1.5"
   }
 }
